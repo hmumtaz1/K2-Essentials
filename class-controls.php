@@ -50,13 +50,20 @@ class Controls {
         add_action('init', array($this, 'k2e_perform_checked_snippets'));
     }
 
-    private function include_control_files() {
+    public function include_control_files() {
         require_once 'controls/login-redirect.php';
         require_once 'controls/block-gutenberg.php';
         require_once 'controls/disable-admin-bar.php';
         require_once 'controls/maintenance-mode.php';
         require_once 'controls/hide-update.php';
         require_once 'controls/disable-image-compressor.php';
+        require_once 'controls/bypass-add-to-cart.php';
+        require_once 'controls/change-add-to-cart-text.php';
+        require_once 'controls/set-min-order-amount.php';
+        require_once 'controls/keep-item-in-cart.php';
+        require_once 'controls/remove-password-strength.php';
+        require_once 'controls/replace-out-of-stock-text.php';
+        
     }
     
     // Section HTML, displayed before the first option
@@ -92,27 +99,17 @@ class Controls {
         add_settings_field('k2e_maintaince_mode', '<div class="k2_essentials_setting_label">Put Site Under Maintaince</div>', 'maintenance_mode_checkbox', __FILE__, 'main_section');        
         add_settings_field('k2e_hide_update_message', '<div class="k2_essentials_setting_label">Hide Wordpress Update Notice for Clients</div>', 'hide_update_checkbox', __FILE__, 'main_section');
         add_settings_field('k2e_disable_image_compressor', '<div class="k2_essentials_setting_label">Disable Wordpress Default Image Compressor</div>','disable_image_compression_checkbox', __FILE__, 'main_section');
-        
-/*        
-        add_settings_section('Woo_Section', '<div class="k2_essentials_Setting_Tab_Title">Woocommerce Settings</div>', 'k2_essentials_woo_commerce_settings', __FILE__);
-        
-        add_settings_field('k2_essentials_Bypass_add_to_cart', '<div class="k2_essentials_setting_label">Bypass Add to Cart</div>','k2_essentials_Setting_Bypass_add_to_cart', __FILE__, 'Woo_Section');
-        
-        add_settings_field('k2_essentials_Product_Already_In_Cart', '<div class="k2_essentials_setting_label">Display “product already in cart” instead of “add to cart” button</div>','k2_essentials_Setting_Product_Already_In_Cart', __FILE__, 'Woo_Section');
-        
-        add_settings_field('k2_essentials_Minumin_Order_Amount', '<div class="k2_essentials_setting_label">Set minimum order amount</div>','k2_essentials_Setting_Minumin_Order_Amount', __FILE__, 'Woo_Section');
-
-        add_settings_field('k2_essentials_Keep_Last_Item_In_Cart', '<div class="k2_essentials_setting_label">Keep Last Item in Cart</div>','k2_essentials_Keep__Setting_Last_Item_In_Cart', __FILE__, 'Woo_Section');
-
-        add_settings_field('k2_essentials_Remove_Password_Strenght_Check', '<div class="k2_essentials_setting_label">Remove Woocommerce Password Strenght Check</div>','k2_essentials_Remove_Setting_Password_Strenght_Check', __FILE__, 'Woo_Section');
-
-        add_settings_field('k2_essentials_Replace_out_of_stock', '<div class="k2_essentials_setting_label">Replace Out of Stock Text</div>','k2_essentials_Replace_out_Setting_of_stock', __FILE__, 'Woo_Section');
-
-    }
-    */
+        add_settings_section('Woo_Section', '<div class="k2_essentials_Setting_Tab_Title">Woocommerce Settings</div>', array($this, 'k2e_woo_commerce_settings'), __FILE__);      
+        add_settings_field('k2e_bypass_add_to_cart', '<div class="k2_essentials_setting_label">Bypass Add to Cart</div>','bypass_add_to_cart_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_product_already_in_cart', '<div class="k2_essentials_setting_label">Display “product already in cart” instead of “add to cart” button</div>','k2e_product_in_cart_checkbox', __FILE__, 'Woo_Section');       
+        add_settings_field('k2e_min_order', '<div class="k2_essentials_setting_label">Set minimum order amount</div>','minumin_order_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_keep_item_in_cart', '<div class="k2_essentials_setting_label">Keep Last Item in Cart</div>','k2e_keep_item_in_cart_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_remove_password_strength', '<div class="k2_essentials_setting_label">Remove Woocommerce Password Strenght Check</div>','k2e_remove_password_strength_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_replace_out_of_stock', '<div class="k2_essentials_setting_label">Replace Out of Stock Text</div>','k2e_replace_out_of_stock_checkbox', __FILE__, 'Woo_Section');
+     
     }
 
-    function k2e_perform_checked_snippets(){
+    public function k2e_perform_checked_snippets(){
         $options = get_option('plugin_options');
         
         if($options['login_redirect_check']=='on') { 
@@ -130,43 +127,43 @@ class Controls {
         }
             
         if($options['hide_update_check']=='on') { 
-            add_action('admin_menu','wphidenag');	
+            add_action('admin_head','hide_update_notice');	
         }
         
         if ($options['disable_image_compression_checkbox']=='on'){
             add_filter( 'big_image_size_threshold', '__return_false' );
         }
-        
-        /*
+
         // WooCommerce if Options
         // 
         
-        if ($options['k2_essentials_Bypass_add_to_cart_Checkbox']=='on'){
+        
+        if ($options['add_to_cart_check']=='on'){
             add_filter('woocommerce_add_to_cart_redirect', 'k2_essentials_Bypass_Cart_Function');
-        }
-    
-        if ($options['k2_essentials_Setting_Product_Already_In_Cart_Checkbox']=='on'){
-            add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
-            add_filter( 'add_to_cart_text', 'woo_archive_custom_cart_button_text' );
-    
-        }
-        if ($options['k2_essentials_Minumin_Order_Amount_Checkbox']=='on'){
-            add_action( 'woocommerce_checkout_process', 'wc_minimum_order_amount' );
-            add_action( 'woocommerce_before_cart' , 'wc_minimum_order_amount' );	
-        }
+        }    
         
-        if($options['k2_essentials_Keep__Setting_Last_Item_In_Cart_CheckBox'] == 'on'){
-            add_filter( 'woocommerce_add_to_cart_validation', 'remove_cart_item_before_add_to_cart', 20, 3 );
+        if ($options['k2e_product_in_cart_check']=='on'){
+            add_filter( 'woocommerce_product_single_add_to_cart_text', 'k2e_woo_cart_button_text' );
+            add_filter( 'add_to_cart_text', 'k2e_woo_archive_cart_button_text' );
         }
-        
-        if($options['k2_essentials_Remove_Password_Strenght_Check_CheckBox']=='on'){
-            add_action( 'wp_print_scripts', 'wc_ninja_remove_password_strength', 100 );
+
+        if ($options['k2e_min_order_check']=='on'){
+            add_action( 'woocommerce_checkout_process', 'k2_woo_minimum_order_amount' );
+            add_action( 'woocommerce_before_cart' , 'k2e_woo_minimum_order_amount' );	
         }
-        
-        if ($options['k2_essentials_Replace_out_Setting_of_stock_CheckBox']=='on'){
-    add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
-    
-        }*/
+
+        if($options['k2e_keep_item_in_cart_check'] == 'on'){
+            add_filter( 'woocommerce_add_to_cart_validation', 'k2e_remove_cart_item', 20, 3 );
+        }
+
+        if($options['k2e_remove_password_strength_check']=='on'){
+            add_action( 'wp_print_scripts', 'k2e_remove_password_strength', 100 );
+        }
+
+        if ($options['k2e_replace_out_of_stock_check']=='on'){
+            add_filter( 'woocommerce_get_availability', 'k2e_woo_get_availability', 1, 2);
+        }
+
     }
 
     public function load_admin_styles() {
@@ -204,6 +201,13 @@ class Controls {
     public function k2e_plugin_options_validate($input) {
         // Check our textbox option field contains no HTML tags - if so strip them out
         return $input; // return validated input
+    }
+
+    public function k2e_woo_commerce_settings(){
+        echo '<div>
+                <p>Here, you can enable/disable fields that are needed before deployment</p>
+            </div>';
+        
     }
         
 }

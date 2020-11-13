@@ -24,3 +24,11 @@ function hide_update_checkbox() {
 		</div>
 	";
 }
+
+//Remove Update Messages for all users but admin
+function hide_update_notice()
+{
+    if (!current_user_can('update_core')) {
+        remove_action( 'admin_notices', 'update_nag', 3 );
+    }
+}
