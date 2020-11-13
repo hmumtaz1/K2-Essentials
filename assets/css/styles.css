@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css');
+
+
+.k2_essentials_parent_Class{
+	display: flex;
+	width: 100%;
+}
+
+
+.K2_essentials_welcome_message_parent{
+	display: flex;
+	width: 100%;
+}
+
+.K2_essentials_welcome_message{
+	color: #128a9d;
+	font-size: 2.5em;
+	font-family: 'helvetica';
+}
+
+
+.k2_essentials_Setting_Tab_Title{
+	color: #128a9d;
+	font-size: 1.5em;
+	font-family: 'helvetica';
+}
+
+.k2_essentials_Setting_Tab_Title_description{
+	color: #000000;
+	font-size: 1.2em;
+	font-family: 'helvetica';
+	padding-bottom: 1em;
+}
+
+
+.k2_essentials_setting_toggle{
+	display: inline-flex;
+	flex-direction: row;	
+	width: 100%;
+	margin-left: 3em;
+}
+
+.k2_essentials_setting_label{
+	font-size: 1.2em;
+	font-family: 'helvetica';
+	color: #128a9d;
+}
+
+.k2_essentials_redirect_url_div1 {
+	flex-basis: 20%;
+}
+
+.k2_essentials_redirect_url_div2 {
+	flex-basis: 20%;
+}
+
+.k2_essentials_redirect_url_div3 {
+	flex-basis: 20%;
+}
+
+
+
+
+
+.k2_essenetials_switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.k2_essenetials_switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.k2_essenetials_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #43cea2;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.k2_essenetials_slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .k2_essenetials_slider {
+  background-color: #128a9d;
+}
+
+input:focus + .k2_essenetials_slider {
+  box-shadow: 0 0 1px #128a9d;
+}
+
+input:checked + .k2_essenetials_slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.k2_essenetials_slider.k2_essenetials_round {
+  border-radius: 34px;
+}
+
+.k2_essenetials_slider.k2_essenetials_round:before {
+  border-radius: 50%;
+}
+
+
+/* Other CSS */
+
+
+.k2_essentials_divider_parent{
+	display: flex;
+	width: 60%;
+}
+.k2_essentials_divider{
+	border-top: 3px solid #43cea2;
+	margin-top: -1em;
+	width: 100%;
+}
+
+
+
+
+
+.k2_essentials_divider_tab_parent{
+	display: flex;
+	width: 60%;
+}
+.k2_essentials_tab_divider{
+	border-top: 3px solid #43cea2;
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
