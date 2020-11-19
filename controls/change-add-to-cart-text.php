@@ -19,6 +19,9 @@ function k2e_product_in_cart_checkbox() {
 	}
 	
 	echo "<div class='k2_essentials_setting_toggle'>
+
+			<div class='k2_essentials_setting_label'>Display “product already in cart” instead of “add to cart” button</div>
+
 			<label class='k2_essenetials_switch'>
 				<input ".$checked." id='k2e_product_already_in_cart' name='plugin_options[k2e_product_in_cart_check]' type='checkbox' />
 				<span class='k2_essenetials_slider k2_essenetials_round'></span>

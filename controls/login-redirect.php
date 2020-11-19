@@ -15,22 +15,27 @@ function login_redirect_checkbox() {
     if($options['login_redirect_check']=='on' && !empty($options['text_string'])) { 
 		$checked = ' checked="checked" '; 
     }
-	echo "<div class='k2_essentials_setting_toggle'>
-	<div class='k2_essentials_redirect_url_div2'>
-		<label class='k2_essenetials_switch'>
-			<input ".$checked." id='k2e_login_redirect' name='plugin_options[login_redirect_check]' type='checkbox' />
-			<span class='k2_essenetials_slider k2_essenetials_round'></span>
-		</label>
-	</div>
-	
-	<div class='k2_essentials_redirect_url_div2'>
-		<p>Page Slug</p> 
-	</div>
-	
-	<div class='k2_essentials_redirect_url_div3' >
-		<input id='plugin_text_string' name='plugin_options[text_string]' size='40' type='text' value='{$options['text_string']}' />	
-	</div>
-	
+    echo "
+    <div class='k2_essentials_setting_toggle'>
+        <div class='k2_essentials_setting_label'> 
+            Enable to redirect login url
+        </div>
+
+        <div class='k2_essentials_redirect_url_div2'>
+            <label class='k2_essenetials_switch'>
+                <input ".$checked." id='k2e_login_redirect' name='plugin_options[login_redirect_check]' type='checkbox' />
+                <span class='k2_essenetials_slider k2_essenetials_round'></span>
+            </label>
+        </div>
+        <div class='break'></div>
+        <div class='k2_essentials_redirect_input_label'>
+            <p>Page Slug</p> 
+        </div>
+        
+        <div class='k2_essentials_redirect_url_div3' >
+            <input id='plugin_text_string' name='plugin_options[text_string]' size='40' type='text' value='{$options['text_string']}' />	
+        </div>
+
 	</div>
 				
     ";

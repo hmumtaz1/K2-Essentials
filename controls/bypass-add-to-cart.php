@@ -19,6 +19,8 @@ function bypass_add_to_cart_checkbox() {
 	}
 	
 	echo "<div class='k2_essentials_setting_toggle'>
+
+			<div class='k2_essentials_setting_label'>Bypass Add to Cart</div>
 			<label class='k2_essenetials_switch'>
 				<input ".$checked." id='k2e_bypass_add_to_cart' name='plugin_options[add_to_cart_check]' type='checkbox' />
 				<span class='k2_essenetials_slider k2_essenetials_round'></span>

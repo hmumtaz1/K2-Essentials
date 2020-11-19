@@ -20,6 +20,9 @@ function k2e_keep_item_in_cart_checkbox() {
 	}
 	
 	echo "<div class='k2_essentials_setting_toggle'>
+
+			<div class='k2_essentials_setting_label'>Keep Last Item in Cart</div>
+			
 			<label class='k2_essenetials_switch'>
 				<input ".$checked." id='k2e_keep_item_in_cart' name='plugin_options[k2e_keep_item_in_cart_check]' type='checkbox' />
 				<span class='k2_essenetials_slider k2_essenetials_round'></span>

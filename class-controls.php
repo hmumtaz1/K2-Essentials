@@ -85,27 +85,38 @@ class Controls {
             array ($this, 'k2_essentials_options_page_fn')
         );
     }
-    
+
+    public function wpse_239421_hide_section() {
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+            $('[scope=row]').closest('th').hide();
+            } );
+        </script>
+        <?php
+    }
 
     public function k2e_init (){
-        
+
+        add_action( 'admin_head', array($this,'wpse_239421_hide_section' ));
+
         register_setting('plugin_options', 'plugin_options', array($this, 'k2e_plugin_options_validate' ));
         add_settings_section('main_section', '<div class="k2_essentials_Setting_Tab_Title">General Settings</div>', array($this, 'k2e_section_text_fn'), __FILE__);
 
 
-        add_settings_field('k2e_login_redirect', '<div class="k2_essentials_setting_label">Enable to redirect login url</div>', 'login_redirect_checkbox', __FILE__, 'main_section');
-        add_settings_field('k2e_block_gutenberg_editor', '<div class="k2_essentials_setting_label">Disable for classic gutenberg editor</div>', 'block_gutenberg_editor_checkbox', __FILE__, 'main_section');
-        add_settings_field('k2e_disable_admin_bar', '<div class="k2_essentials_setting_label">Disable admin bar</div>', 'disable_admin_bar_checkbox', __FILE__, 'main_section');
-        add_settings_field('k2e_maintaince_mode', '<div class="k2_essentials_setting_label">Put Site Under Maintaince</div>', 'maintenance_mode_checkbox', __FILE__, 'main_section');        
-        add_settings_field('k2e_hide_update_message', '<div class="k2_essentials_setting_label">Hide Wordpress Update Notice for Clients</div>', 'hide_update_checkbox', __FILE__, 'main_section');
-        add_settings_field('k2e_disable_image_compressor', '<div class="k2_essentials_setting_label">Disable Wordpress Default Image Compressor</div>','disable_image_compression_checkbox', __FILE__, 'main_section');
+        add_settings_field('k2e_login_redirect', false, 'login_redirect_checkbox', __FILE__, 'main_section');
+        add_settings_field('k2e_block_gutenberg_editor', false, 'block_gutenberg_editor_checkbox', __FILE__, 'main_section');
+        add_settings_field('k2e_disable_admin_bar', false, 'disable_admin_bar_checkbox', __FILE__, 'main_section');
+        add_settings_field('k2e_maintaince_mode', false, 'maintenance_mode_checkbox', __FILE__, 'main_section');        
+        add_settings_field('k2e_hide_update_message', false, 'hide_update_checkbox', __FILE__, 'main_section');
+        add_settings_field('k2e_disable_image_compressor', false,'disable_image_compression_checkbox', __FILE__, 'main_section');
         add_settings_section('Woo_Section', '<div class="k2_essentials_Setting_Tab_Title">Woocommerce Settings</div>', array($this, 'k2e_woo_commerce_settings'), __FILE__);      
-        add_settings_field('k2e_bypass_add_to_cart', '<div class="k2_essentials_setting_label">Bypass Add to Cart</div>','bypass_add_to_cart_checkbox', __FILE__, 'Woo_Section');
-        add_settings_field('k2e_product_already_in_cart', '<div class="k2_essentials_setting_label">Display “product already in cart” instead of “add to cart” button</div>','k2e_product_in_cart_checkbox', __FILE__, 'Woo_Section');       
-        add_settings_field('k2e_min_order', '<div class="k2_essentials_setting_label">Set minimum order amount</div>','minumin_order_checkbox', __FILE__, 'Woo_Section');
-        add_settings_field('k2e_keep_item_in_cart', '<div class="k2_essentials_setting_label">Keep Last Item in Cart</div>','k2e_keep_item_in_cart_checkbox', __FILE__, 'Woo_Section');
-        add_settings_field('k2e_remove_password_strength', '<div class="k2_essentials_setting_label">Remove Woocommerce Password Strenght Check</div>','k2e_remove_password_strength_checkbox', __FILE__, 'Woo_Section');
-        add_settings_field('k2e_replace_out_of_stock', '<div class="k2_essentials_setting_label">Replace Out of Stock Text</div>','k2e_replace_out_of_stock_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_bypass_add_to_cart', false,'bypass_add_to_cart_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_product_already_in_cart', false,'k2e_product_in_cart_checkbox', __FILE__, 'Woo_Section');       
+        add_settings_field('k2e_min_order', false,'minumin_order_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_keep_item_in_cart', false,'k2e_keep_item_in_cart_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_remove_password_strength', false,'k2e_remove_password_strength_checkbox', __FILE__, 'Woo_Section');
+        add_settings_field('k2e_replace_out_of_stock', false,'k2e_replace_out_of_stock_checkbox', __FILE__, 'Woo_Section');
      
     }
 
@@ -139,7 +150,7 @@ class Controls {
         
         
         if ($options['add_to_cart_check']=='on'){
-            add_filter('woocommerce_add_to_cart_redirect', 'k2_essentials_Bypass_Cart_Function');
+            add_filter('woocommerce_add_to_cart_redirect', 'k2e_bypass_cart_function');
         }    
         
         if ($options['k2e_product_in_cart_check']=='on'){
@@ -148,7 +159,7 @@ class Controls {
         }
 
         if ($options['k2e_min_order_check']=='on'){
-            add_action( 'woocommerce_checkout_process', 'k2_woo_minimum_order_amount' );
+            add_action( 'woocommerce_checkout_process', 'k2e_woo_minimum_order_amount' );
             add_action( 'woocommerce_before_cart' , 'k2e_woo_minimum_order_amount' );	
         }
 
@@ -214,11 +225,3 @@ class Controls {
 
 Controls::instance();
 
-
-    /*
-    function k2_essentials_woo_commerce_settings(){
-        echo '<div>
-                <p>Here, you can enable/disable fields that are needed before deployment</p>
-            </div>';	
-    }
-    */

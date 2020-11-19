@@ -16,6 +16,9 @@ function disable_image_compression_checkbox() {
 		$checked = ' checked="checked" '; 
 	}
 	echo "<div class='k2_essentials_setting_toggle'>
+
+				<div class='k2_essentials_setting_label'>Disable Wordpress Default Image Compressor</div>
+				
 				<label class='k2_essenetials_switch'>
 					<input ".$checked." id='k2e_disable_image_compressor' name='plugin_options[disable_image_compression_checkbox]' type='checkbox' />
 					<span class='k2_essenetials_slider k2_essenetials_round'></span>

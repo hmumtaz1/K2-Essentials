@@ -17,10 +17,18 @@ function block_gutenberg_editor_checkbox() {
 		$checked = ' checked="checked" '; 
 	}
 	echo "<div class='k2_essentials_setting_toggle'>
+
+			<div class='k2_essentials_setting_label'>Disable for classic gutenberg editor</div>
+
 			<label class='k2_essenetials_switch'>
 				<input ".$checked." id='k2e_block_gutenberg_editor' name='plugin_options[block_gutenberg_check]' type='checkbox' />
 					<span class='k2_essenetials_slider k2_essenetials_round'></span>
 			</label>
+
+			<div class='break'></div>
+
+			<div class='k2_essentials_toggle_description'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.. </div>
+
 		  </div>
 	";
 }

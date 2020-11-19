@@ -21,6 +21,9 @@ function k2e_replace_out_of_stock_checkbox() {
 	}
 	
 	echo "<div class='k2_essentials_setting_toggle'>
+
+			<div class='k2_essentials_setting_label'>Replace Out of Stock Text</div>
+
 			<div class='k2_essentials_redirect_url_div2'>
 				<label class='k2_essenetials_switch'>
 					<input ".$checked." id='k2e_replace_out_of_stock' name='plugin_options[k2e_replace_out_of_stock_check]' type='checkbox' />
@@ -28,7 +31,9 @@ function k2e_replace_out_of_stock_checkbox() {
 				</label>
 			</div>
 
-			<div class='k2_essentials_redirect_url_div2'>
+			<div class='break'></div>
+
+			<div class='k2_essentials_redirect_input_label'>
 				<p>New Text</p> 
 			</div>
 
