@@ -33,9 +33,8 @@ function login_redirect_checkbox() {
         </div>
         
         <div class='k2_essentials_redirect_url_div3' >
-            <input id='plugin_text_string' name='plugin_options[text_string]' size='40' type='text' value='{$options['text_string']}' />	
+                <input id='plugin_text_string' name='plugin_options[text_string]' size='40' type='text' value='{$options['text_string']}' />	
         </div>
-
 	</div>
 				
     ";

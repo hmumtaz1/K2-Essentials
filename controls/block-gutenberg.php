@@ -26,9 +26,6 @@ function block_gutenberg_editor_checkbox() {
 			</label>
 
 			<div class='break'></div>
-
-			<div class='k2_essentials_toggle_description'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.. </div>
-
 		  </div>
 	";
 }
